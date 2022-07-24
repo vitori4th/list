@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista Supermercado</title>
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <section>
+        <header>
+          <strong>Lista de compras</strong>
+          <p>Escreva os itens que você deseja comprar!</p>
+        </header>
+
+        <form action="/" method="POST" onsubmit=" return checkField(event)">
+          <label for="item">Item:</label>
+          <input
+            type="text"
+            id="item"
+            name="item"
+            placeholder="Digite um item"
+          />
+
+          <button type="submit">Adicionar</button>
+        </form>
+
+        <div class="list-container">
+          <strong>Itens já cadastrados:</strong>
+
+          <ul id="list">
+            {% for item in items%}
+            <li class="list-item">
+              <span> <input type="checkbox" />{{item.name}} </span>
+
+              <a href="/{{item.id}}"
+                ><i class="fa" title="Excluir item da lista">&#xf014;</i></a
+              >
+            </li>
+            {%endfor%}
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="./scripts.js"></script>
+  </body>
+</html>
