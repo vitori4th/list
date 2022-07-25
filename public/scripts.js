@@ -15,3 +15,7 @@ function checkField(event) {
     alert('Por favor, preencha o campo vazio!')
   }
 }
+
+function check() {
+  console.log('ola')
+}

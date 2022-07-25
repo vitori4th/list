@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista Supermercado</title>
+    <title>To Do List</title>
 
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,12 +22,29 @@
   <body>
     <main>
       <section>
+        <form action="/" method="POST">
+          <label for="list">Nova Lista:</label>
+          <input
+            type="text"
+            id="list"
+            name="list"
+            placeholder="Digite o nome da lista"
+          />
+          <button class="btn-list" type="submit">Adicionar</button>
+        </form>
+      </section>
+      {% for list in lists%}
+      <section>
         <header>
-          <strong>Lista de compras</strong>
-          <p>Escreva os itens que você deseja comprar!</p>
+          <strong>{{list.name_list}}</strong>
+          <p>Escreva os itens!</p>
         </header>
 
-        <form action="/" method="POST" onsubmit=" return checkField(event)">
+        <form
+          action="/{{list.id_list}}"
+          method="POST"
+          onsubmit=" return checkField(event)"
+        >
           <label for="item">Item:</label>
           <input
             type="text"
@@ -43,18 +60,25 @@
           <strong>Itens já cadastrados:</strong>
 
           <ul id="list">
-            {% for item in items%}
+            {% for item in items%} {% if item.id_list == list.id_list%}
             <li class="list-item">
-              <span> <input type="checkbox" />{{item.name}} </span>
+              <span>
+                <input type="checkbox" name="check" />{{item.name_item}}
+              </span>
 
-              <a href="/{{item.id}}"
+              <a href="/{{item.id_item}}"
                 ><i class="fa" title="Excluir item da lista">&#xf014;</i></a
               >
             </li>
-            {%endfor%}
+            {%endif%} {%endfor%}
           </ul>
         </div>
+
+        <a href="/delete/{{list.id_list}}"
+          ><i class="fa" title="Excluir item da lista">&#xf014;</i></a
+        >
       </section>
+      {%endfor%}
     </main>
 
     <script src="./scripts.js"></script>

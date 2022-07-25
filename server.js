@@ -17,29 +17,38 @@ nunjucks.configure('views', {
   noCache: true
 })
 
-//criei uma rota /
-//capturo o pedido do cliente para responder
 server.get('/', function (req, res) {
+  let lists
   //pegar dados da tabela
-  db.all(`SELECT * FROM items`, function (err, rows) {
+  db.all(`SELECT * FROM lists`, function (err, rows) {
     if (err) {
       console.log(err)
       return res.send('Erro no banco de dados')
     }
 
-    return res.render('index.html', { items: rows })
+    lists = rows
+  })
+  db.all(`SELECT * FROM items`, function (err, rows) {
+    if (err) {
+      console.log(err)
+      return res.send('Erro no banco de dados')
+    }
+    return res.render('index.html', { lists: lists, items: rows })
   })
 })
 
-server.post('/', function (req, res) {
+server.post('/:id_list', function (req, res) {
+  const id_list = req.params.id_list
+
   //inserir dados na tabela
   const query = `
   INSERT INTO items(
-    name
-  ) VALUES (?);
+    name_item,
+    id_list
+  ) VALUES (?,?);
   `
 
-  const value = [req.body.item]
+  const value = [req.body.item, id_list]
 
   db.run(query, value, function (err) {
     if (err) {
@@ -51,10 +60,10 @@ server.post('/', function (req, res) {
   })
 })
 
-server.get('/:id', function (req, res) {
-  const id = req.params.id
+server.get('/:id_item', function (req, res) {
+  const id_item = req.params.id_item
   const query = `
-      DELETE FROM items where id = ${id};
+      DELETE FROM items WHERE id_item = "${id_item}";
   `
   db.run(query, function (err) {
     if (err) {
@@ -66,5 +75,56 @@ server.get('/:id', function (req, res) {
   })
 })
 
+server.post('/', function (req, res) {
+  //inserir dados na tabela
+  const query = `
+  INSERT INTO lists(
+    name_list
+  ) VALUES (?);
+  `
+
+  const value = [req.body.list]
+
+  db.run(query, value, function (err) {
+    if (err) {
+      console.log(err)
+      return res.send('Erro no banco de dados')
+    }
+
+    return res.redirect('/')
+  })
+})
+
+server.get('/delete/:id_list', function (req, res) {
+  const id_list = req.params.id_list
+  const query = `
+      DELETE FROM lists WHERE id_list = "${id_list}";
+      DELETE FROM items WHERE id_list = "${id_list}";
+  `
+  db.run(query, function (err) {
+    if (err) {
+      console.log(err)
+      return res.send('Erro no banco de dados!')
+    }
+
+    return res.redirect('/')
+  })
+})
+
+// server.put('/check/:id_item', function (req, res) {
+//   const id_item = req.params.id_item
+
+//   const query = `
+//       UPDATE items SET done = "1" WHERE id_item ="${id_item}";
+//   `
+//   db.run(query, function (err) {
+//     if (err) {
+//       console.log(err)
+//       return res.send('Erro no banco de dados!')
+//     }
+
+//     return res.redirect('/')
+//   })
+// })
 //liguei o servidor
 server.listen(3000)

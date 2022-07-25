@@ -82,6 +82,22 @@ form:focus-within button:hover {
   background-color: var(--secondary-color);
 }
 
+.btn-list {
+  cursor: pointer;
+
+  float: left;
+}
+.btn-list:hover {
+  background-color: var(--secondary-color);
+}
+
+main {
+  max-width: 48rem;
+  width: 100%;
+
+  margin: auto;
+  padding: 2.4rem;
+}
 button {
   background-color: var(--brand-color);
   color: var(--white);
@@ -100,17 +116,21 @@ button {
   cursor: not-allowed;
 }
 
-main {
+section {
   max-width: 48rem;
   width: 100%;
 
   margin: 6rem auto;
-  padding: 2.4rem;
+  padding: 2.5rem;
 
   background-color: #fafafa;
 
   border: 1px solid var(--brand-dark-gray);
   border-radius: 4px;
+}
+
+section a i {
+  float: right;
 }
 
 form {
