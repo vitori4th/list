@@ -129,7 +129,6 @@ server.post('/status/:id_item', function (req, res) {
       console.log(err)
       return res.send('Erro no banco de dados!')
     }
-    console.log(status)
     return res.redirect('/')
   })
 })

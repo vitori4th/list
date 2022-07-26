@@ -106,6 +106,11 @@ main {
   width: 75%;
   margin-inline: auto;
 }
+
+.lists {
+  display: flex;
+  flex-direction: column;
+}
 button {
   background-color: var(--brand-color);
   color: var(--white);
@@ -128,7 +133,7 @@ section {
   max-width: 48rem;
   width: 100%;
 
-  margin: 6rem auto;
+  margin: 3rem auto;
   padding: 2.5rem;
 
   background-color: #fafafa;
