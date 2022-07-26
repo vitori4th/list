@@ -20,6 +20,7 @@ db.serialize(function () {
     `CREATE TABLE IF NOT EXISTS items(
      id_item INTEGER PRIMARY KEY AUTOINCREMENT,
      name_item TEXT,
+     done TEXT,
      id_list INTEGER,
      FOREIGN KEY (id_list) REFERENCES lists(id_list)
      );

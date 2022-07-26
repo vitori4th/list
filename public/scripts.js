@@ -16,6 +16,3 @@ function checkField(event) {
   }
 }
 
-function check() {
-  console.log('ola')
-}

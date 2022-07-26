@@ -44,11 +44,12 @@ server.post('/:id_list', function (req, res) {
   const query = `
   INSERT INTO items(
     name_item,
+    done,
     id_list
-  ) VALUES (?,?);
+  ) VALUES (?,?,?);
   `
 
-  const value = [req.body.item, id_list]
+  const value = [req.body.item, , id_list]
 
   db.run(query, value, function (err) {
     if (err) {
@@ -111,20 +112,26 @@ server.get('/delete/:id_list', function (req, res) {
   })
 })
 
-// server.put('/check/:id_item', function (req, res) {
-//   const id_item = req.params.id_item
+server.post('/status/:id_item', function (req, res) {
+  const id_item = req.params.id_item
+  let status = req.body.checkbox
 
-//   const query = `
-//       UPDATE items SET done = "1" WHERE id_item ="${id_item}";
-//   `
-//   db.run(query, function (err) {
-//     if (err) {
-//       console.log(err)
-//       return res.send('Erro no banco de dados!')
-//     }
-
-//     return res.redirect('/')
-//   })
-// })
+  if (status == '') {
+    status = 'checked'
+  } else {
+    status = ''
+  }
+  const query = `
+        UPDATE items SET done = "${status}" WHERE id_item ="${id_item}";
+   `
+  db.run(query, function (err) {
+    if (err) {
+      console.log(err)
+      return res.send('Erro no banco de dados!')
+    }
+    console.log(status)
+    return res.redirect('/')
+  })
+})
 //liguei o servidor
 server.listen(3000)

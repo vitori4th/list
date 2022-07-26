@@ -21,63 +21,83 @@
   </head>
   <body>
     <main>
-      <section>
-        <form action="/" method="POST">
-          <label for="list">Nova Lista:</label>
-          <input
-            type="text"
-            id="list"
-            name="list"
-            placeholder="Digite o nome da lista"
-          />
-          <button class="btn-list" type="submit">Adicionar</button>
-        </form>
-      </section>
-      {% for list in lists%}
-      <section>
-        <header>
-          <strong>{{list.name_list}}</strong>
-          <p>Escreva os itens!</p>
-        </header>
+      <div class="new-list">
+        <section>
+          <form action="/" method="POST">
+            <label for="list">Nova Lista:</label>
+            <input
+              type="text"
+              id="list"
+              name="list"
+              placeholder="Digite o nome da lista"
+            />
+            <button class="btn-list" type="submit">Adicionar</button>
+          </form>
+        </section>
+      </div>
 
-        <form
-          action="/{{list.id_list}}"
-          method="POST"
-          onsubmit=" return checkField(event)"
-        >
-          <label for="item">Item:</label>
-          <input
-            type="text"
-            id="item"
-            name="item"
-            placeholder="Digite um item"
-          />
-
-          <button type="submit">Adicionar</button>
-        </form>
-
-        <div class="list-container">
-          <strong>Itens já cadastrados:</strong>
-
-          <ul id="list">
-            {% for item in items%} {% if item.id_list == list.id_list%}
-            <li class="list-item">
-              <span>
-                <input type="checkbox" name="check" />{{item.name_item}}
-              </span>
-
-              <a href="/{{item.id_item}}"
+      <div>
+        {% for list in lists%}
+        <section>
+          <header>
+            <strong
+              >{{list.name_list}}<a href="/delete/{{list.id_list}}"
                 ><i class="fa" title="Excluir item da lista">&#xf014;</i></a
-              >
-            </li>
-            {%endif%} {%endfor%}
-          </ul>
-        </div>
+              ></strong
+            >
+            <p>Escreva os itens!</p>
+          </header>
 
-        <a href="/delete/{{list.id_list}}"
-          ><i class="fa" title="Excluir item da lista">&#xf014;</i></a
-        >
-      </section>
+          <form
+            action="/{{list.id_list}}"
+            method="POST"
+            onsubmit=" return checkField(event)"
+          >
+            <label for="item">Item:</label>
+            <input
+              type="text"
+              id="item"
+              name="item"
+              placeholder="Digite um item"
+            />
+
+            <button type="submit">Adicionar</button>
+          </form>
+
+          <div class="list-container">
+            <strong>Itens já cadastrados:</strong>
+
+            <ul id="list">
+              {% for item in items%} {% if item.id_list == list.id_list%}
+
+              <form
+                action="/status/{{item.id_item}}"
+                method="post"
+                class="form-item"
+              >
+                <li class="list-item">
+                  <span>
+                    <input
+                      onchange="this.form.submit()"
+                      type="checkbox"
+                      name="checkbox"
+                      id="checkbox"
+                      value="{{item.done}}"
+                      {{item.done}}
+                    />{{item.name_item}}
+                  </span>
+
+                  <a href="/{{item.id_item}}"
+                    ><i class="fa" title="Excluir item da lista">&#xf014;</i></a
+                  >
+                </li>
+              </form>
+
+              {%endif%} {%endfor%}
+            </ul>
+          </div>
+        </section>
+      </div>
       {%endfor%}
     </main>
 

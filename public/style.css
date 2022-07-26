@@ -92,11 +92,19 @@ form:focus-within button:hover {
 }
 
 main {
-  max-width: 48rem;
+  max-width: 140rem;
   width: 100%;
 
   margin: auto;
   padding: 2.4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.new-list {
+  width: 75%;
+  margin-inline: auto;
 }
 button {
   background-color: var(--brand-color);
@@ -173,6 +181,10 @@ form input {
   align-items: center;
 }
 
+#checkbox {
+  margin: auto;
+}
+
 .list-item > span {
   display: flex;
   align-items: center;
@@ -185,4 +197,20 @@ i {
   cursor: pointer;
 
   color: var(--brand-dark-gray);
+}
+
+@media (max-width: 800px) {
+  html {
+    font-size: 87.5%;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    gap: 0;
+  }
+  section {
+    margin-block: 2rem;
+  }
 }
