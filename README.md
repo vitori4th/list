@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-    <img src="https://github.com/vitori4th/list/blob/main/assets/ToDoList.jpeg?raw=true">
+    <img src="https://github.com/vitori4th/list/blob/main/assets/ToDoDemonstration.gif">
 <h3 >
 
 # Indice
@@ -68,5 +68,7 @@ Permite criar várias listas de To Do e cada lista pode ser adicionado vários i
 Acesse a aplicação via localhost:3000
 
 ---
+## 🗂 Como baixar o projeto
+ <img src="https://github.com/vitori4th/list/blob/main/assets/ToDoDemonstration.gif">
 
 Desenvolvido 💜 por Vitória Thais da Silva
