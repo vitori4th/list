@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-    <img src="https://github.com/vitori4th/list/blob/main/assets/ToDoDemonstration.gif">
+    <img src="https://github.com/vitori4th/list/blob/main/assets/ToDoList.jpeg">
 <h3 >
 
 # Indice
