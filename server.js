@@ -40,8 +40,9 @@ server.get('/', function (req, res) {
 server.post('/:id_list', function (req, res) {
   const id_list = req.params.id_list
 
-  //inserir dados na tabela
-  const query = `
+  if (req.body.item != '') {
+    //inserir dados na tabela
+    const query = `
   INSERT INTO items(
     name_item,
     done,
@@ -49,16 +50,18 @@ server.post('/:id_list', function (req, res) {
   ) VALUES (?,?,?);
   `
 
-  const value = [req.body.item, , id_list]
+    const value = [req.body.item, , id_list]
 
-  db.run(query, value, function (err) {
-    if (err) {
-      console.log(err)
-      return res.send('Erro no banco de dados')
-    }
+    db.run(query, value, function (err) {
+      if (err) {
+        console.log(err)
+        return res.send('Erro no banco de dados')
+      }
 
-    return res.redirect('/')
-  })
+      return res.redirect('/')
+    })
+  }
+  return res.redirect('/')
 })
 
 server.get('/:id_item', function (req, res) {
@@ -78,22 +81,23 @@ server.get('/:id_item', function (req, res) {
 
 server.post('/', function (req, res) {
   //inserir dados na tabela
-  const query = `
+  if (req.body.list != '') {
+    const query = `
   INSERT INTO lists(
     name_list
   ) VALUES (?);
   `
 
-  const value = [req.body.list]
+    const value = [req.body.list]
 
-  db.run(query, value, function (err) {
-    if (err) {
-      console.log(err)
-      return res.send('Erro no banco de dados')
-    }
-
-    return res.redirect('/')
-  })
+    db.run(query, value, function (err) {
+      if (err) {
+        console.log(err)
+        return res.send('Erro no banco de dados')
+      }
+    })
+  }
+  return res.redirect('/')
 })
 
 server.get('/delete/:id_list', function (req, res) {
