@@ -68,7 +68,7 @@ Permite criar várias listas de To Do e cada lista pode ser adicionado vários i
 Acesse a aplicação via localhost:3000
 
 ---
-## 🗂 Como baixar o projeto
- <img src="https://github.com/vitori4th/list/blob/main/assets/ToDoDemonstration.gif">
+## 📌 Demonstração
+ <img src="https://github.com/vitori4th/list/blob/main/assets/ToDoListDemonstration.gif">
 
 Desenvolvido 💜 por Vitória Thais da Silva
